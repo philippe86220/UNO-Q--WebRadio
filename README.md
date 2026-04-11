@@ -115,10 +115,12 @@ This script listens for HTTP commands and controls audio playback using `mpg123`
 ---
 
 ### 7. Play a radio stream
-Select a station in the WebUI
-The request is sent to the backend
-radio_service.py launches mpg123
-Audio is played through the USB sound card 🔊
+- Select a station in the WebUI
+- The request is sent to the backend
+- radio_service.py launches mpg123
+- Audio is played through the USB sound card
+
+👉 Start manually first. Use systemd only after validation.
 
 ---
 
