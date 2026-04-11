@@ -14,6 +14,16 @@ so that the MP3 stream from a web radio is **played directly through this speake
 
 ---
 
+## Important limitation
+
+Arduino App Lab cannot directly play audio.
+
+Audio playback must be handled by a Linux host service (radio_service.py).
+
+The WebUI and App Lab only send commands.
+
+---
+
 ## Audio Output Hardware
 
 To enable sound playback from the web radio directly on the Arduino UNO Q, an external USB audio solution is required.
