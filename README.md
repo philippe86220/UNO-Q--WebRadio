@@ -505,7 +505,7 @@ alsamixer -c 0
 
 ---
 
-## scrennshot
+## screenshot
 
 ![aperçu](/docs/scrennshot.png)
 
