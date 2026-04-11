@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UNO Q Radio</title>
+<style>
+body { font-family: Arial; text-align: center; margin-top: 40px; }
+button { font-size: 18px; margin: 10px; padding: 12px 24px; }
+#status { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
 
+<h1>Web Radio UNO Q</h1>
+
+<button onclick="play('info')">France Info</button>
+<button onclick="play('rtl')">RTL</button>
+<button onclick="play('inter')">France Inter</button>
+<button onclick="play('musique')">France Musique</button>
+<button onclick="stopRadio()">Stop</button>
+
+<div id="status">Etat : inconnu</div>
+
+<script>
+async function getJSON(url) {
+  const r = await fetch(url);
+  return await r.json();
+}
+
+async function play(name) {
+  const data = await getJSON("/api/" + name);
+  document.getElementById("status").textContent =
+    data.ok ? "Lecture : " + data.station : "Erreur";
+}
+
+async function stopRadio() {
+  await getJSON("/api/stop");
+  document.getElementById("status").textContent = "Arrêt";
+}
+</script>
+
+</body>
+</html>
