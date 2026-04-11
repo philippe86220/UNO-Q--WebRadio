@@ -108,6 +108,20 @@ This script listens for HTTP commands and controls audio playback using `mpg123`
 
 ---
 
+👉 This service internally calls shell scripts to control the radio streams, such as:
+
+- `play_INFO.sh`
+- `play_RTL.sh`
+- `play_INTER.sh`
+- `play_MUSIQUE.sh`
+- `stop_radio.sh`
+
+These scripts use `mpg123` to start or stop the audio streams.
+
+---
+
+👉 See the dedicated section below for more details about these scripts.
+
 ### 6. Start App Lab project
 - Open Arduino App Lab
 - Load the Web Radio project
