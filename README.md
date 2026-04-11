@@ -14,7 +14,7 @@ so that the MP3 stream from a web radio is **played directly through this speake
 
 ---
 
-## 🔊 Audio Output
+## Audio Output
 
 Audio is not generated inside App Lab, but on the Linux system of the UNO Q.
 
@@ -24,7 +24,7 @@ The audio flow is as follows:
 - ALSA sends the audio to the sound card
 - The **USB audio device** outputs the sound to the speaker
 
-👉 This provides a **fully autonomous audio output**, directly from the UNO Q.
+This provides a **fully autonomous audio output**, directly from the UNO Q.
 
 ---
 
