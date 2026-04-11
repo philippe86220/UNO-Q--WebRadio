@@ -117,10 +117,9 @@ This script listens for HTTP commands and controls audio playback using `mpg123`
 - `stop_radio.sh`
 
 These scripts use `mpg123` to start or stop the audio streams.
+👉 See the dedicated section below for more details about these scripts.
 
 ---
-
-👉 See the dedicated section below for more details about these scripts.
 
 ### 6. Start App Lab project
 - Open Arduino App Lab
