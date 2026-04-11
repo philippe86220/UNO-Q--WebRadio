@@ -52,6 +52,7 @@ It allows connecting multiple peripherals such as the USB sound card and other d
 
 ## How to run
 
+👉 Start manually first. Use systemd only after validation.
 Follow these steps to run the Web Radio on the Arduino UNO Q.
 
 ### 1. Install required tools (Linux side)
@@ -119,8 +120,6 @@ This script listens for HTTP commands and controls audio playback using `mpg123`
 - The request is sent to the backend
 - radio_service.py launches mpg123
 - Audio is played through the USB sound card
-
-👉 Start manually first. Use systemd only after validation.
 
 ---
 
