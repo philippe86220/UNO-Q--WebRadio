@@ -511,6 +511,13 @@ alsamixer -c 0
 
 ---
 
+## 📘 Documentation
+
+- 🇬🇧 Detailed explanation: [radio_service_readme.md](radio_service_readme.md)
+- 🇫🇷 Version française: [radio_service_readme_fr.md](radio_service_readme_fr.md)
+
+---
+
 ## Acknowledgments
 
 This project was developed with the help of ChatGPT,  
