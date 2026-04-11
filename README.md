@@ -268,8 +268,8 @@ chmod +x /home/arduino/scripts/*.sh
   - `/stop`
   - `/status`
 
-code `/home/arduino/scripts/radio_service.py` :
-
+This script runs on the Linux host (outside App Lab) and acts as the audio engine of the system.  
+code `/home/arduino/scripts/radio_service.py` :  
 ```python
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import subprocess
