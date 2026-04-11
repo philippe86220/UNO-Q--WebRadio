@@ -18,7 +18,7 @@ so that the MP3 stream from a web radio is **played directly through this speake
 
 To enable sound playback from the web radio directly on the Arduino UNO Q, an external USB audio solution is required.
 
-**USB Sound Card**  
+### USB Sound Card
 
 - Product link: https://www.amazon.fr/dp/B08Y8CZB2S  
 - Role: Converts digital audio from the UNO Q (Linux side) into an analog signal (3.5 mm jack output)
@@ -27,7 +27,8 @@ This is essential because the UNO Q does not provide a native audio output.
 
 ---
 
-**USB Hub**
+### USB Hub
+
 - Product link: https://www.amazon.fr/dp/B0CF224WX9
 - Role: Expands the USB connectivity of the UNO Q
 - Usage:
@@ -36,6 +37,78 @@ This is essential because the UNO Q does not provide a native audio output.
     
 A USB hub is required because the UNO Q provides only a single USB port.
 It allows connecting multiple peripherals such as the USB sound card and other devices at the same time.
+
+---
+
+## How to run
+
+Follow these steps to run the Web Radio on the Arduino UNO Q.
+
+### 1. Install required tools (Linux side)
+
+Make sure `mpg123` is installed on the UNO Q:
+
+```
+sudo apt update
+sudo apt install mpg123
+```
+
+---
+
+### 2. Connect the hardware
+- Plug the USB hub into the UNO Q
+- Connect the USB sound card to the hub
+- Connect a speaker or headphones to the sound card
+  
+Check that the sound card is detected:  
+```
+aplay -l
+```
+
+### 3. Set audio volume
+Run: 
+```
+alsamixer -c 0
+```
+Adjust volume if needed.
+
+---
+
+### 4. Copy the radio service
+Copy radio_service.py to the UNO Q (example):
+```
+/home/arduino/scripts/radio_service.py
+```
+Make it executable:
+```
+chmod +x /home/arduino/scripts/radio_service.py
+```
+
+---
+
+### 5. Start the radio service
+Run the service manually:
+
+```
+python3 /home/arduino/scripts/radio_service.py
+```
+
+This script listens for HTTP commands and controls audio playback using `mpg123`.
+
+---
+
+### 6. Start App Lab project
+- Open Arduino App Lab
+- Load the Web Radio project
+- Run the application
+
+---
+
+### 7. Play a radio stream
+Select a station in the WebUI
+The request is sent to the backend
+radio_service.py launches mpg123
+Audio is played through the USB sound card 🔊
 
 ---
 
@@ -171,7 +244,7 @@ sudo apt install mpg123
 
 ---
 
-**Example script**
+### Example script
 
 ```
 #!/bin/sh
@@ -184,7 +257,8 @@ chmod +x /home/arduino/scripts/*.sh
 ```
 ---
 
-Host Service (radio_service.py)
+### Host Service (radio_service.py)
+
 - Runs on port 9000
 - Handles:
   - `/info`
