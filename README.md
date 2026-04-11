@@ -447,10 +447,10 @@ ui.expose_api("GET", "/api/info", lambda: proxy_get("/info"))
 
 - HTML interface
 - buttons:
-  -France Info
+  - France Info
   - RTL
-  -France Inter
-  -France Musique
+  - France Inter
+  - France Musique
 - calls `/api/...`
 
 ---
