@@ -34,7 +34,8 @@ This is essential because the UNO Q does not provide a native audio output.
   - Connect the USB sound card
   - Optionally connect other peripherals (keyboard, storage, etc.)
     
-The USB hub is required because the UNO Q has limited USB ports.
+A USB hub is required because the UNO Q provides only a single USB port.
+It allows connecting multiple peripherals such as the USB sound card and other devices at the same time.
 
 ---
 
