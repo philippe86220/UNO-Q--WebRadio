@@ -394,6 +394,16 @@ journalctl -u radio_service.service -n 50 --no-pager
 
 Tested on Arduino UNO Q
 Using App Lab + WebUI HTML Brick
+Notes 
+
+---
+
+The USB sound card must be recognized by the Linux system (aplay -l)
+Volume can be adjusted using:
+
+```
+alsamixer -c 0
+```
 
 ---
 
