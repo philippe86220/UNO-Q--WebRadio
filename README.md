@@ -1,13 +1,30 @@
 # UNO Q Web Radio (App Lab + WebUI + Linux Host Audio)
 
-## Objective
+## 🎯 Objective
 
-Create a web-controlled radio on the **Arduino UNO Q** using:
+Create a web-controlled radio on the Arduino UNO Q using:
 
 - App Lab (WebUI HTML Brick)
 - Python backend (App Lab container)
 - Linux host service for audio playback (`mpg123`)
-- Communication via HTTP (`172.17.0.1`)
+- Internal communication via HTTP (`172.17.0.1`)
+
+The goal is also to use a **USB sound card connected to a small speaker**,  
+so that the MP3 stream from a web radio is **played directly through this speaker**.
+
+---
+
+## 🔊 Audio Output
+
+Audio is not generated inside App Lab, but on the Linux system of the UNO Q.
+
+The audio flow is as follows:
+
+- `mpg123` reads the MP3 radio stream
+- ALSA sends the audio to the sound card
+- The **USB audio device** outputs the sound to the speaker
+
+👉 This provides a **fully autonomous audio output**, directly from the UNO Q.
 
 ---
 
