@@ -496,6 +496,8 @@ alsamixer -c 0
 
 ![aperçu](/docs/scrennshot.png)
 
+---
+
 ## Acknowledgments
 
 This project was developed with the help of ChatGPT,  
