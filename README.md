@@ -17,7 +17,9 @@ so that the MP3 stream from a web radio is **played directly through this speake
 ## Audio Output Hardware
 
 To enable sound playback from the web radio directly on the Arduino UNO Q, an external USB audio solution is required.
-**USB Sound Card**
+
+**USB Sound Card**  
+
 - Product link: https://www.amazon.fr/dp/B08Y8CZB2S  
 - Role: Converts digital audio from the UNO Q (Linux side) into an analog signal (3.5 mm jack output)
 - Output: Connects to a small speaker or headphones
