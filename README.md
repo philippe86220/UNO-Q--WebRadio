@@ -114,7 +114,10 @@ This script listens for HTTP commands and controls audio playback using `mpg123`
 - `play_RTL.sh`
 - `play_INTER.sh`
 - `play_MUSIQUE.sh`
+- `play_NOSTALGIE.sh`
+- `play_mRadioTop50.sh`
 - `stop_radio.sh`
+
 
 These scripts use `mpg123` to start or stop the audio streams.  
 👉 See the dedicated section below for more details about these scripts.
@@ -197,6 +200,8 @@ This project uses two separate environments on the UNO Q:
   - `/rtl`
   - `/inter`
   - `/musique`
+  - `/nostalgie`
+  - `/mradio`
 - Stops any currently playing stream
 - Launches the correct shell script
 - Starts audio playback using `mpg123`
@@ -253,6 +258,8 @@ play_INFO.sh
 play_RTL.sh
 play_INTER.sh
 play_MUSIQUE.sh
+play_NOSTALGIE.sh
+play_mRadioTop50.sh
 stop_radio.sh
 ```
 ---
@@ -289,6 +296,8 @@ chmod +x /home/arduino/scripts/*.sh
   - `/rtl`
   - `/inter`
   - `/musique`
+  - `/nostalgie`
+  - `/mradio`
   - `/stop`
   - `/status`
 
@@ -319,6 +328,14 @@ RADIOS = {
     "musique": {
         "script": "/home/arduino/scripts/play_MUSIQUE.sh",
         "name": "France Musique"
+    },
+    "nostalgie": {
+        "script": "/home/arduino/scripts/play_NOSTALGIE.sh",
+        "name": "Nostalgie"
+    },
+    "mradio": {
+        "script": "/home/arduino/scripts/play_mRadioTop50.sh",
+        "name": "M Radio Top 50"
     }
 }
 
@@ -382,6 +399,7 @@ class RadioHandler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     print(f"Radio service listening on {HOST}:{PORT}")
     HTTPServer((HOST, PORT), RadioHandler).serve_forever()
+
 ```
 
 ---
@@ -451,6 +469,8 @@ ui.expose_api("GET", "/api/info", lambda: proxy_get("/info"))
   - RTL
   - France Inter
   - France Musique
+  - Nostalgie
+  - M Radio Top 50
 - calls `/api/...`
 
 ---
