@@ -29,6 +29,8 @@ ui.expose_api("GET", "/api/info", lambda: api_radio("info"))
 ui.expose_api("GET", "/api/rtl", lambda: api_radio("rtl"))
 ui.expose_api("GET", "/api/inter", lambda: api_radio("inter"))
 ui.expose_api("GET", "/api/musique", lambda: api_radio("musique"))
+ui.expose_api("GET", "/api/nostalgie", lambda: api_radio("nostalgie"))
+ui.expose_api("GET", "/api/mradio", lambda: api_radio("mradio"))
 
 ui.expose_api("GET", "/api/stop", api_stop)
 ui.expose_api("GET", "/api/status", api_status)
