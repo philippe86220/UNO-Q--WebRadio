@@ -2,11 +2,13 @@
 
 ## 1. Imports
 
+```python
 from http.server import BaseHTTPRequestHandler, HTTPServer  
 import subprocess  
 import json  
 import time  
 from urllib.parse import urlparse, parse_qs  
+```
 
 - http.server: creates a simple HTTP server  
 - BaseHTTPRequestHandler: handles incoming requests  
@@ -20,18 +22,22 @@ from urllib.parse import urlparse, parse_qs
 
 ## 2. Network configuration
 
+```python
 HOST = "0.0.0.0"  
 PORT = 9000  
+```
 
-- 0.0.0.0: listen on all interfaces  
-- PORT: service port  
+- `0.0.0.0`: listen on all interfaces  
+- `PORT`: service port  
 
 ---
 
 ## 2.1 Volume configuration
 
+```python
 CARD = "0"  
 VOLUME_NUMID = "3"  
+```
 
 Defines the ALSA sound card and the mixer control used for volume.
 
@@ -43,7 +49,9 @@ amixer -c 0 cset numid=3 50%
 
 ## 3. Radio definitions
 
+```
 RADIOS = { ... }
+```
 
 Maps URL → script + display name
 
@@ -53,8 +61,9 @@ GET /info → runs play_INFO.sh
 ---
 
 ## 4. Stop script
-
+```python
 SCRIPT_STOP = "/home/arduino/scripts/stop_radio.sh"
+```
 
 Stops any running stream  
 
@@ -62,7 +71,9 @@ Stops any running stream
 
 ## 5. HTTP handler class
 
+```python
 class RadioHandler(BaseHTTPRequestHandler):
+```
 
 Defines custom behavior for HTTP requests  
 
@@ -70,7 +81,9 @@ Defines custom behavior for HTTP requests
 
 ## 6. Send JSON response
 
+```python
 def _send_json(self, payload, status=200):
+```
 
 - Converts Python dict → JSON  
 - Sends HTTP response  
@@ -80,15 +93,18 @@ def _send_json(self, payload, status=200):
 
 ## 7. Disable logs
 
+```python
 def log_message(self, format, *args): return
-
+```
 Prevents console spam  
 
 ---
 
 ## 8. Start radio
 
+```python
 def start_radio(self, script):
+```
 
 - Stop current radio  
 - Wait 1 second  
@@ -100,7 +116,9 @@ def start_radio(self, script):
 
 ## 8.1 Set volume
 
+```python
 def set_volume(self, value):
+```
 
 - Converts the received value to an integer  
 - If invalid → default = 50  
@@ -112,25 +130,30 @@ def set_volume(self, value):
 
 ## 9. Handle GET requests
 
+```python
 def do_GET(self):
+```
 
 The request path and query parameters are parsed:
 
+```python
 parsed = urlparse(self.path)  
 path = parsed.path.strip("/")  
 query = parse_qs(parsed.query)  
-
+```
 Cases:
 
-- if path in RADIOS → start radio  
-- if path == "volume" → set volume using `value` parameter  
-- if path == "stop" → stop playback  
-- if path == "status" → check mpg123 process  
+- `if path in RADIOS` → start radio  
+- `if path == "volume"` → set volume using `value` parameter  
+- `if path == "stop"` → stop playback  
+- `if path == "status"` → check mpg123 process  
 - else → return 404  
 
 Example:
 
+```
 GET /volume?value=70  
+```
 
 Sets volume to 70%.
 
@@ -138,9 +161,10 @@ Sets volume to 70%.
 
 ## 10. Server start
 
+```python
 if __name__ == "__main__":
-
 HTTPServer((HOST, PORT), RadioHandler).serve_forever()
+```
 
 - Starts HTTP server  
 - Runs indefinitely  
