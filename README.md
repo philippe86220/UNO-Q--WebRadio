@@ -639,3 +639,13 @@ GET /api/volume?value=XX
 ---
 
 Note: volume control relies on an ALSA control (numid=3), which may vary depending on the audio device.
+
+---
+
+## Project optimization
+
+The `sketch.ino` file has been removed.
+
+Since the project is now MPU-only (App Lab), no `/sketch` folder is included in the repository.
+
+This avoids unnecessary compilation and results in faster application startup.
