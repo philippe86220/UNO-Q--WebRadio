@@ -1,3 +1,7 @@
+![Arduino App Lab](https://img.shields.io/badge/Arduino%20App%20Lab-0.7.0-blue)
+![Platform](https://img.shields.io/badge/macOS-26.3.1-lightgrey)
+![Target](https://img.shields.io/badge/Board-UNO%20Q-green)
+
 # UNO Q Web Radio (App Lab + WebUI + Linux Host Audio)
 
 ## Objective
