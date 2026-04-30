@@ -149,7 +149,7 @@ The audio flow is as follows:
 - ALSA sends the audio to the sound card
 - The **USB audio device** outputs the sound to the speaker
 
-This provides a **fully autonomous audio output**, directly from the UNO Q.
+This provides **autonomous audio playback directly from the UNO Q**.
 
 ---
 
@@ -236,6 +236,17 @@ mpg123 reads radio stream
 ALSA outputs sound
 ```
 
+```
+User moves volume slider
+↓
+HTML calls /api/volume?value=XX
+↓
+main.py forwards request
+↓
+radio_service.py
+↓
+amixer adjusts ALSA volume
+```
 ---
 
 ## Project Structure
@@ -300,6 +311,7 @@ chmod +x /home/arduino/scripts/*.sh
   - `/mradio`
   - `/stop`
   - `/status`
+  - `/volume`
 
 This script runs on the Linux host (outside App Lab) and acts as the audio engine of the system.  
 code `/home/arduino/scripts/radio_service.py` :  
