@@ -2,11 +2,11 @@
 
 ## 1. Imports
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import subprocess
-import json
-import time
-from urllib.parse import urlparse, parse_qs
+from http.server import BaseHTTPRequestHandler, HTTPServer  
+import subprocess  
+import json  
+import time  
+from urllib.parse import urlparse, parse_qs  
 
 - http.server : crée un serveur HTTP simple
 - BaseHTTPRequestHandler : gère les requêtes entrantes
