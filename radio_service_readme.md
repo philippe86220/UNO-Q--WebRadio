@@ -10,13 +10,13 @@ import time
 from urllib.parse import urlparse, parse_qs  
 ```
 
-- http.server: creates a simple HTTP server  
-- BaseHTTPRequestHandler: handles incoming requests  
-- HTTPServer: runs the server  
-- subprocess: runs system commands (scripts, mpg123)  
-- json: formats responses  
-- time: used for delays  
-- urllib.parse: parses URL and query parameters  
+- `http.server`: creates a simple HTTP server  
+- `BaseHTTPRequestHandler`: handles incoming requests  
+- `HTTPServer`: runs the server  
+- `subprocess`: runs system commands (scripts, mpg123)  
+- `json`: formats responses  
+- `time`: used for delays  
+- `urllib.parse`: parses URL and query parameters  
 
 ---
 
@@ -43,7 +43,7 @@ Defines the ALSA sound card and the mixer control used for volume.
 
 Example command:
 
-amixer -c 0 cset numid=3 50%
+`amixer -c 0 cset numid=3 50%`
 
 ---
 
@@ -96,6 +96,7 @@ def _send_json(self, payload, status=200):
 ```python
 def log_message(self, format, *args): return
 ```
+
 Prevents console spam  
 
 ---
