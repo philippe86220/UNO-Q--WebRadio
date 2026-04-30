@@ -586,3 +586,35 @@ which assisted with:
 
 The final implementation and testing were done on real hardware (UNO Q).
 
+## Update: Volume control
+
+This update adds volume control directly from the WebUI.
+
+### How it works
+
+The WebUI sends a volume value (0–100) to the App Lab backend, which forwards the request to the Linux radio service.
+The service then applies the volume using ALSA (`amixer`) on the USB sound card.
+
+### Flow
+
+```
+WebUI → App Lab (main.py) → radio_service.py → amixer → USB sound card
+```
+
+### API
+
+```
+GET /api/volume?value=XX
+```
+
+- `XX`: volume percentage (0–100)
+
+### Result
+
+- Real-time volume adjustment
+- No terminal access required
+- Fully integrated into the Web interface
+
+---
+
+Note: volume control relies on an ALSA control (numid=3), which may vary depending on the audio device.
