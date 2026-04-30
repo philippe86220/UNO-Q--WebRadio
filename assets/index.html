@@ -21,9 +21,56 @@ button { font-size: 18px; margin: 10px; padding: 12px 24px; }
 <button onclick="play('mradio')">M Radio Top 50</button>
 <button onclick="stopRadio()">Stop</button>
 
+<div class="volume-box">
+    <label for="volumeSlider">Volume : <span id="volumeValue">50</span>%</label>
+    <input
+        type="range"
+        id="volumeSlider"
+        min="0"
+        max="100"
+        value="50"
+        step="1"
+    >
+</div>
+
 <div id="status">Etat : inconnu</div>
 
 <script>
+
+const volumeSlider = document.getElementById("volumeSlider");
+const volumeValue = document.getElementById("volumeValue");
+
+let volumeTimer = null;
+
+async function setVolume(value) {
+    try {
+        const response = await fetch(`/api/volume?value=${value}`);
+
+        if (!response.ok) {
+            throw new Error("Erreur API volume");
+        }
+
+        const data = await response.json();
+
+        if (data.ok) {
+            volumeSlider.value = data.volume;
+            volumeValue.textContent = data.volume;
+        }
+    } catch (error) {
+        console.error("Erreur volume :", error);
+    }
+}
+
+volumeSlider.addEventListener("input", () => {
+    const value = volumeSlider.value;
+    volumeValue.textContent = value;
+
+    clearTimeout(volumeTimer);
+
+    volumeTimer = setTimeout(() => {
+        setVolume(value);
+    }, 150);
+});
 async function getJSON(url) {
   const r = await fetch(url);
   return await r.json();
