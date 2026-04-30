@@ -500,15 +500,22 @@ ui.expose_api("GET", "/api/info", lambda: proxy_get("/info"))
 
 **WebUI**
 
-- HTML interface
-- buttons:
+**HTML interface**
+
+- Buttons:
   - France Info
   - RTL
   - France Inter
   - France Musique
   - Nostalgie
   - M Radio Top 50
-- calls `/api/...`
+    
+- Volume control:
+  - Slider (0–100) for real-time volume adjustment
+
+- API calls:
+  - `/api/...` for radio control
+  - `/api/volume?value=XX` for volume
 
 ---
 
