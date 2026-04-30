@@ -586,6 +586,8 @@ which assisted with:
 
 The final implementation and testing were done on real hardware (UNO Q).
 
+---
+
 ## Update: Volume control
 
 This update adds volume control directly from the WebUI.
