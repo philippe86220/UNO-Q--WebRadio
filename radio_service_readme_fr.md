@@ -6,6 +6,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import subprocess
 import json
 import time
+from urllib.parse import urlparse, parse_qs
 
 - http.server : crée un serveur HTTP simple
 - BaseHTTPRequestHandler : gère les requêtes entrantes
@@ -13,6 +14,7 @@ import time
 - subprocess : exécute des commandes système (scripts, mpg123)
 - json : formate les réponses en JSON
 - time : permet de faire des pauses
+- urllib.parse : permet d’analyser l’URL et les paramètres
 
 ---
 
@@ -26,14 +28,23 @@ PORT = 9000
 
 ---
 
+## 2.1 Configuration du volume
+
+CARD = "0"
+VOLUME_NUMID = "3"
+
+- CARD : numéro de la carte son ALSA
+- VOLUME_NUMID : contrôle ALSA utilisé pour le volume
+
+Exemple :
+
+amixer -c 0 cset numid=3 50%
+
+---
+
 ## 3. Définition des radios
 
-RADIOS = {
-    "info": {
-        "script": "/home/arduino/scripts/play_INFO.sh",
-        "name": "France Info"
-    }
-}
+RADIOS = { ... }
 
 - Associe une URL à un script
 
@@ -90,17 +101,35 @@ def start_radio(self, script):
 
 ---
 
+## 8.1 Gestion du volume
+
+def set_volume(self, value):
+
+- Convertit la valeur reçue en entier
+- Si erreur → valeur par défaut = 50
+- Limite la valeur entre 0 et 100
+- Applique le volume avec amixer
+- Retourne la valeur appliquée
+
+---
+
 ## 9. Gestion GET
 
 def do_GET(self):
 
-- Analyse l’URL
+- Analyse l’URL et les paramètres
 
 Cas :
 - /info → lance radio
+- /volume?value=XX → règle le volume
 - /stop → stop
 - /status → vérifie mpg123
 - sinon → erreur 404
+
+Exemple :
+GET /volume?value=70
+
+→ règle le volume à 70%
 
 ---
 
@@ -116,6 +145,6 @@ HTTPServer((HOST, PORT), RadioHandler).serve_forever()
 
 ## Résumé
 
-WebUI → HTTP → radio_service.py → script → mpg123 → audio
+WebUI → App Lab → HTTP → radio_service.py → amixer / script → mpg123 → audio
 
 Ce script fait le lien entre App Lab et le système Linux.
