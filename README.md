@@ -308,9 +308,13 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import subprocess
 import json
 import time
+from urllib.parse import urlparse, parse_qs
 
 HOST = "0.0.0.0"
 PORT = 9000
+
+CARD = "0"
+VOLUME_NUMID = "3"
 
 RADIOS = {
     "info": {
@@ -366,15 +370,47 @@ class RadioHandler(BaseHTTPRequestHandler):
             start_new_session=True
         )
 
+    def set_volume(self, value):
+        try:
+            volume = int(value)
+        except ValueError:
+            volume = 50
+
+        if volume < 0:
+            volume = 0
+
+        if volume > 100:
+            volume = 100
+
+        subprocess.run(
+            ["amixer", "-c", CARD, "cset", f"numid={VOLUME_NUMID}", f"{volume}%"],
+            capture_output=True,
+            text=True
+        )
+
+        return volume
+
     def do_GET(self):
 
-        path = self.path.strip("/")
+        parsed = urlparse(self.path)
+        path = parsed.path.strip("/")
+        query = parse_qs(parsed.query)
 
         if path in RADIOS:
             self.start_radio(RADIOS[path]["script"])
             self._send_json({
                 "ok": True,
                 "station": RADIOS[path]["name"]
+            })
+            return
+
+        if path == "volume":
+            value = query.get("value", ["50"])[0]
+            volume = self.set_volume(value)
+
+            self._send_json({
+                "ok": True,
+                "volume": volume
             })
             return
 
@@ -399,6 +435,7 @@ class RadioHandler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     print(f"Radio service listening on {HOST}:{PORT}")
     HTTPServer((HOST, PORT), RadioHandler).serve_forever()
+
 
 ```
 
